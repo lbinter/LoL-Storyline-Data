@@ -1,11 +1,20 @@
-import json
-import cv2
+import json, cv2, argparse, os
 from PIL import Image
 
 # useSimple = True
 
+parser = argparse.ArgumentParser()
+parser.add_argument("matchId", help ="riot league of legends match id")
+parser.add_argument("useMode", help ="useMode 0 - simple, 1 - Simple(7), 2 - Complex")
+parser.add_argument("workingDir", help ="working directory location")
+args = parser.parse_args()
+
+matchId = args.matchId
 # useMode 0 - simple, 1 - Simple(7), 2 - Complex
-useMode = 1
+useMode = args.useMode
+workingDir = args.workingDir
+
+os.chdir(workingDir)
 
 colorToArea = None
 LOLTimeline = None
@@ -228,16 +237,16 @@ def getArea(x, y):
     return areaToSession[area]
 
 
-f = open('Results/player1.json')
-f2 = open('Results/player2.json')
-f3 = open('Results/player3.json')
-f4 = open('Results/player4.json')
-f5 = open('Results/player5.json')
-f6 = open('Results/player6.json')
-f7 = open('Results/player7.json')
-f8 = open('Results/player8.json')
-f9 = open('Results/player9.json')
-f10 = open('Results/player10.json')
+f = open('Results/'+matchId+'/player1.json')
+f2 = open('Results/'+matchId+'/player2.json')
+f3 = open('Results/'+matchId+'/player3.json')
+f4 = open('Results/'+matchId+'/player4.json')
+f5 = open('Results/'+matchId+'/player5.json')
+f6 = open('Results/'+matchId+'/player6.json')
+f7 = open('Results/'+matchId+'/player7.json')
+f8 = open('Results/'+matchId+'/player8.json')
+f9 = open('Results/'+matchId+'/player9.json')
+f10 = open('Results/'+matchId+'/player10.json')
 
 fileOpenList = [f, f2, f3, f4, f5, f6, f7, f8, f9, f10]
 
@@ -279,12 +288,12 @@ for i in range(len(playerList)):
         "Session": getArea(x, y)
     }
     
-    cv2.imwrite("trajectory" + str(i+1) + ".png", image)
+    cv2.imwrite("Results/"+matchId+"/trajectory" + str(i+1) + ".png", image)
 
     LOLTimeline["Story"]["Characters"][playerList[i]].append(lastObj)
 
 
     jsonString = json.dumps(LOLTimeline, indent=2)
-    jsonFile = open("Results/trajectory.json", "w") # used to be P.json
+    jsonFile = open("Results/"+matchId+"/trajectory.json", "w") # used to be P.json
     jsonFile.write(jsonString)
     jsonFile.close()
