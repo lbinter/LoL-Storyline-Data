@@ -9,13 +9,19 @@ Web App.
 ## Python Pipeline of Fetching Data
 
 1. Get your RIOT API key from [here](https://developer.riotgames.com/).
-2. Open the `main.py` file and replace the `api` variable with your RIOT API key.
-3. Find out a player's puuid and fill in the `puuid` variable in `main.py`.
-4. Run `python main.py` to get the most recent matches from the player.
-5. Run `python analyze_G.python` to get each player's geo-time data.
-6. Run `python trajectory_G.py` to aggregate the above 10 players' data and generate the storyline JSON file.
-7. Run `python battle-extractor2.py` to get the DBSCAN data and generate the DBSCAN JSON file.
-8. Run `python count1.py` to get the killing events information and generate the killingInfo JSON file.
+3. Find out a matchId
+4. Run `python riotMatch.py {API Key} {MatchId} {Path to working directory}` to get the match from the player.
+5. Run `python analyze_G.python {MatchId} {useMode (default=1)} {Path to working directory}` to get each player's geo-time data.
+6. Run `python trajectory_G.py {MatchId} {Path to working directory}` to aggregate the above 10 players' data and generate the storyline JSON file.
+7. Run `python battle-extractor2.py {MatchId} {Path to working directory}` to get the DBSCAN data and generate the DBSCAN JSON file and battle.png.
+8. Run `python count1.py {MatchId} {Path to working directory}` to get the killing events information and generate the killingInfo JSON file.
+
+## Working Directory
+The working directory must contain
+ - "Results" folder (to download matches into and generated data from the matches)
+ - LOLBaseMap1.png
+ - LOLBaseMap2.png
+ - LOLBaseMap3.png
 
 ## Notes
 
