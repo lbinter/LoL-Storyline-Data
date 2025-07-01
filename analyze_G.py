@@ -1,16 +1,26 @@
-import json
-import copy
+import json,  copy, argparse, pprint,os
 from PIL import Image
 
-import pprint
+parser = argparse.ArgumentParser()
+parser.add_argument("matchId", help ="riot league of legends match id")
+parser.add_argument("useMode", help ="useMode 0 - simple, 1 - Simple(7), 2 - Complex")
+parser.add_argument("workingDir", help ="working directory location")
+args = parser.parse_args()
+
+matchId = args.matchId
+useMode = args.useMode
+workingDir = args.workingDir
+
+os.chdir(workingDir)
 
 # load the replay file
-f = open('Match3.json')
+f = open('Results/'+matchId+'/Match.json')
 data = json.load(f)
 
+# prepare output folder
+outputFolder = "Results/" + matchId + "/";
+
 usePlateau = True
-# useMode 0 - simple, 1 - Simple(7), 2 - Complex
-useMode = 1
 
 death_offset = 2500
 respawn_offset = 1000
@@ -255,6 +265,6 @@ for p in range(1,11):
 
     # export of player data to JSON file
     jsonString = json.dumps(timelineInfo)
-    jsonFile = open("Results/Player" + str(currentPlayerID) + ".json", "w")
+    jsonFile = open(outputFolder + "Player" + str(currentPlayerID) + ".json", "w")
     jsonFile.write(jsonString)
     jsonFile.close()
