@@ -1,6 +1,4 @@
-import json
-import cv2
-import copy
+import json, cv2, copy, argparse, os
 from PIL import ImageColor
 import pandas as pd
 import numpy as np
@@ -28,10 +26,19 @@ def plot(data, labels):
 
     return None
 
+parser = argparse.ArgumentParser()
+parser.add_argument("matchId", help ="riot league of legends match id")
+parser.add_argument("workingDir", help ="working directory location")
+args = parser.parse_args()
+
+matchId = args.matchId
+workingDir = args.workingDir
+
+os.chdir(workingDir)
 
 image = cv2.imread('LoLBaseMap3.png')
 
-f = open('Match3.json')
+f = open('Results/'+matchId+'/Match.json')
 data = json.load(f)
 frames = data["info"]["frames"]
 
@@ -60,7 +67,8 @@ for i in range(len(events)):
             # print(str(time) + " " + str(x) + " " + str(y))
 
             new_row = {'x': x, 'y': y, 'time': time}
-            df = df.append(new_row, ignore_index=True)
+            #df = df.append(new_row, ignore_index=True)
+            df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
             original_times.append(events[i][j]['timestamp'])
             currentPlayer.append(events[i][j]['victimId'])
 
@@ -135,9 +143,12 @@ for index, row in df.iterrows():
 # print(json)
 
 jsonString = json.dumps(result, indent=2)
-jsonFile = open("Results/dbscan.json", "w")
+jsonFile = open("Results/"+matchId+"/dbscan.json", "w")
 jsonFile.write(jsonString)
 jsonFile.close()
 
-cv2.imshow('image', image)  # show image and wait for keypress
-cv2.waitKey(0)
+
+cv2.imwrite("Results/"+matchId+"/battle.png", image)
+
+#cv2.imshow('image', image)  # show image and wait for keypress
+#cv2.waitKey(0)
