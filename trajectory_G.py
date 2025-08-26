@@ -233,7 +233,7 @@ def getArea(x, y):
 
 
     area = colorToArea[(r, g, b)]
-    print(area)
+    # print(area)
     return areaToSession[area]
 
 
@@ -262,7 +262,7 @@ for i in range(len(playerList)):
         x = data[j]['x'] / 15000
         y = data[j]['y'] / 15000
         
-        print("playerID = " + str(i+1) + " x = " + str(data[j]['x']) + " y = " + str(data[j]['y']) + " area = " + str(getAreaName(x, y)) + " time = " + str(data[j]['timestamp']))
+        # print("playerID = " + str(i+1) + " x = " + str(data[j]['x']) + " y = " + str(data[j]['y']) + " area = " + str(getAreaName(x, y)) + " time = " + str(data[j]['timestamp']))
 
         pointOneX = int((data[j]['x']) * factor)
         pointOneY = int((15000 - data[j]['y']) * factor)
@@ -296,3 +296,5 @@ for i in range(len(playerList)):
     jsonFile = open("Results/"+matchId+"/trajectory.json", "w") # used to be P.json
     jsonFile.write(jsonString)
     jsonFile.close()
+    
+print(matchId+ " trajectory json File generated, please check.")

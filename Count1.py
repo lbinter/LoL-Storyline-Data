@@ -20,7 +20,7 @@ participantsInfo = data['info']['participants']
 heroList = {}
 heroInfo = []
 
-print(participantsInfo)
+# print(participantsInfo)
 
 for i in range(len(participantsInfo)):
     elem = {'participantId': participantsInfo[i]['participantId'], 'championId': participantsInfo[i]['championId'],
@@ -59,7 +59,7 @@ def addInfo():
                         'killType': temp_eventList[j]['type']}
                 # print(elem)
                 CHAMPION_KILL_INFO.append(elem)
-                print(temp_eventList[j]['position']['x'], temp_eventList[j]['position']['y'])
+                # print(temp_eventList[j]['position']['x'], temp_eventList[j]['position']['y'])
 
 f.close()
 
@@ -133,10 +133,10 @@ for i in range(len(frames)):
         # except KeyError:
         #     continue
 
-print("CHAMPION_KILL: " + str(CHAMPION_KILL))
+# print("CHAMPION_KILL: " + str(CHAMPION_KILL))
 # print("CHAMPION_SPECIAL_KILL: " + str(CHAMPION_SPECIAL_KILL))
 # print("ELITE_MONSTER_KILL: " + str(ELITE_MONSTER_KILL))
-print("BUILDING_KILL: " + str(BUILDING_KILL))
+# print("BUILDING_KILL: " + str(BUILDING_KILL))
 #
 # print("CHAMPION_KILL_INFO: ")
 # print(CHAMPION_KILL_INFO)
@@ -157,4 +157,4 @@ jsonFile = open("Results/"+matchId+"/killingInfo.json", "w")
 jsonFile.write(jsonString)
 jsonFile.close()
 
-print("CHAMPION_KILL_INFO Json File generated, please check.")
+print(matchId+ " killingInfo json file generated, please check.")

@@ -268,3 +268,4 @@ for p in range(1,11):
     jsonFile = open(outputFolder + "Player" + str(currentPlayerID) + ".json", "w")
     jsonFile.write(jsonString)
     jsonFile.close()
+    print(matchId+ " Player" + str(currentPlayerID) + " json File generated, please check.")

@@ -152,3 +152,4 @@ cv2.imwrite("Results/"+matchId+"/battle.png", image)
 
 #cv2.imshow('image', image)  # show image and wait for keypress
 #cv2.waitKey(0)
+print(matchId+ " dbscan json file generated, please check.")
