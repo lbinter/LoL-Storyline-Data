@@ -30,7 +30,7 @@ colorToArea = None
 areaImage = None
 
 if useMode == 0:
-    areaImage = Image.open('LoLBaseMap2.png')
+    areaImage = Image.open('LOLBaseMap2.png')
     colorToArea = {(0, 51, 153): 'BlueBase',
                (153, 255, 255): 'BottomLane',
                (255, 255, 255): 'MidLane',
@@ -39,7 +39,7 @@ if useMode == 0:
                (255, 153, 204): 'PurpleBase',
                }
 elif useMode == 1:
-    areaImage = Image.open('LoLBaseMap3.png')
+    areaImage = Image.open('LOLBaseMap3.png')
     colorToArea = {(0, 51, 153): 'BlueBase',
                    (153, 255, 255): 'BottomLane',
                    (255, 255, 255): 'MidLane',
@@ -50,7 +50,7 @@ elif useMode == 1:
                    (255, 153, 204): 'PurpleBase',
                    }
 else:
-    areaImage = Image.open('LoLBaseMap1.png')
+    areaImage = Image.open('LOLBaseMap1.png')
     colorToArea = {(0, 51, 153): 'BlueBase',
                (204, 204, 255): 'BlueTopLane',
                (102, 102, 255): 'TopBlueJungle',

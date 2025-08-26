@@ -25,7 +25,7 @@ The working directory must contain
 
 ## Notes
 
-LoLBaseMap png files are different divisions of LoL Map.
+LOLBaseMap png files are different divisions of LoL Map.
 
 Match and Match info Json files are some examples which you could get from the API. Match json file contains the timestamp events etc. the match INFO json contains its match ID and the player info for that match.
 

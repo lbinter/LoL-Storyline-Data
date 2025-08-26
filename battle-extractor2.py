@@ -36,7 +36,7 @@ workingDir = args.workingDir
 
 os.chdir(workingDir)
 
-image = cv2.imread('LoLBaseMap3.png')
+image = cv2.imread('LOLBaseMap3.png')
 
 f = open('Results/'+matchId+'/Match.json')
 data = json.load(f)

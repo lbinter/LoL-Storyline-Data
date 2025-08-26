@@ -25,8 +25,8 @@ image = None
 
 
 if useMode == 0:
-    areaImage = Image.open('LoLBaseMap2.png') # which map division to use (simple or complex)
-    image = cv2.imread('LoLBaseMap2.png')
+    areaImage = Image.open('LOLBaseMap2.png') # which map division to use (simple or complex)
+    image = cv2.imread('LOLBaseMap2.png')
     colorToArea = {(0, 51, 153): 'BlueBase',
                    (153, 255, 255): 'BottomLane',
                    (255, 255, 255): 'MidLane',
@@ -72,8 +72,8 @@ if useMode == 0:
         'PurpleBase': 6
     }
 elif useMode == 1:
-    areaImage = Image.open('LoLBaseMap3.png')
-    image = cv2.imread('LoLBaseMap3.png')
+    areaImage = Image.open('LOLBaseMap3.png')
+    image = cv2.imread('LOLBaseMap3.png')
     colorToArea = {(0, 51, 153): 'BlueBase',
                    (153, 255, 255): 'BottomLane',
                    (255, 255, 255): 'MidLane',
@@ -123,8 +123,8 @@ elif useMode == 1:
         'RedBase': 1
     }
 else:
-    areaImage = Image.open('LoLBaseMap1.png')
-    image = cv2.imread('LoLBaseMap1.png')
+    areaImage = Image.open('LOLBaseMap1.png')
+    image = cv2.imread('LOLBaseMap1.png')
     colorToArea = {(0, 51, 153): 'BlueBase',
                    (204, 204, 255): 'BlueTopLane',
                    (102, 102, 255): 'TopBlueJungle',
@@ -255,7 +255,7 @@ playerList = ['Player1', 'Player2', 'Player3', 'Player4', 'Player5', 'Player6', 
 
 for i in range(len(playerList)):
     data = json.load(fileOpenList[i])
-    image = cv2.imread('LoLBaseMap1.png')
+    image = cv2.imread('LOLBaseMap1.png')
     
     for j in range(len(data) - 1):
         # Original Image (Map) size is 15000 * 15000, X and Y needs to be scaled
