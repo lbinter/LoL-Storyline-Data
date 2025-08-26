@@ -2,11 +2,13 @@ import json,  copy, argparse, pprint,os
 from PIL import Image
 
 parser = argparse.ArgumentParser()
+parser.add_argument("regionId", help ="riot api regionId, 1 = americas, 2 = asia, 3 = europe, 4 = sea")
 parser.add_argument("matchId", help ="riot league of legends match id")
 parser.add_argument("useMode", help ="useMode 0 - simple, 1 - Simple(7), 2 - Complex")
 parser.add_argument("workingDir", help ="working directory location")
 args = parser.parse_args()
 
+regionId = args.regionId
 matchId = args.matchId
 useMode = args.useMode
 workingDir = args.workingDir
@@ -14,11 +16,11 @@ workingDir = args.workingDir
 os.chdir(workingDir)
 
 # load the replay file
-f = open('Results/'+matchId+'/Match.json')
+f = open('Results/' + regionId + '/' + matchId + '/Match.json')
 data = json.load(f)
 
 # prepare output folder
-outputFolder = "Results/" + matchId + "/";
+outputFolder = "Results/" + regionId + '/' + matchId + "/";
 
 usePlateau = True
 

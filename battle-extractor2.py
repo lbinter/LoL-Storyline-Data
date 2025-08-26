@@ -27,10 +27,12 @@ def plot(data, labels):
     return None
 
 parser = argparse.ArgumentParser()
+parser.add_argument("regionId", help ="riot api regionId, 1 = americas, 2 = asia, 3 = europe, 4 = sea")
 parser.add_argument("matchId", help ="riot league of legends match id")
 parser.add_argument("workingDir", help ="working directory location")
 args = parser.parse_args()
 
+regionId = args.regionId
 matchId = args.matchId
 workingDir = args.workingDir
 
@@ -38,7 +40,7 @@ os.chdir(workingDir)
 
 image = cv2.imread('LOLBaseMap3.png')
 
-f = open('Results/'+matchId+'/Match.json')
+f = open('Results/' + regionId + '/' + matchId + '/Match.json')
 data = json.load(f)
 frames = data["info"]["frames"]
 
@@ -143,12 +145,12 @@ for index, row in df.iterrows():
 # print(json)
 
 jsonString = json.dumps(result, indent=2)
-jsonFile = open("Results/"+matchId+"/dbscan.json", "w")
+jsonFile = open("Results/" + regionId + '/' + matchId + "/dbscan.json", "w")
 jsonFile.write(jsonString)
 jsonFile.close()
 
 
-cv2.imwrite("Results/"+matchId+"/battle.png", image)
+cv2.imwrite("Results/" + regionId + '/' + matchId + "/battle.png", image)
 
 #cv2.imshow('image', image)  # show image and wait for keypress
 #cv2.waitKey(0)

@@ -2,16 +2,18 @@ import json,argparse,os
 from PIL import Image
 
 parser = argparse.ArgumentParser()
+parser.add_argument("regionId", help ="riot api regionId, 1 = americas, 2 = asia, 3 = europe, 4 = sea")
 parser.add_argument("matchId", help ="riot league of legends match id")
 parser.add_argument("workingDir", help ="working directory location")
 args = parser.parse_args()
 
+regionId = args.regionId
 matchId = args.matchId
 workingDir = args.workingDir
 
 os.chdir(workingDir)
 
-f = open('Results/'+matchId+'/MatchInfo.json')
+f = open('Results/' + regionId + '/' + matchId + '/MatchInfo.json')
 
 data = json.load(f)
 
@@ -63,7 +65,7 @@ def addInfo():
 
 f.close()
 
-f = open('Results/'+matchId+'/Match.json')
+f = open('Results/' + regionId + '/' + matchId + '/Match.json')
 data = json.load(f)
 
 info = data['info']
@@ -153,7 +155,7 @@ for i in range(len(frames)):
 CHAMPION_KILL_INFO.sort(key=lambda x: x["timestamp"])
 
 jsonString = json.dumps(CHAMPION_KILL_INFO, indent=4)
-jsonFile = open("Results/"+matchId+"/killingInfo.json", "w")
+jsonFile = open("Results/" + regionId + '/' + matchId + "/killingInfo.json", "w")
 jsonFile.write(jsonString)
 jsonFile.close()
 

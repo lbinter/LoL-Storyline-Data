@@ -2,18 +2,20 @@ import requests, json, argparse, shutil, time, os
 from pathlib import Path
 
 parser = argparse.ArgumentParser()
-parser.add_argument("api", help="your api key from https://developer.riotgames.com/")
+parser.add_argument("regionId", help ="riot api regionId, 1 = americas, 2 = asia, 3 = europe, 4 = sea")
 parser.add_argument("matchId", help ="riot league of legends match id")
+parser.add_argument("api", help="your api key from https://developer.riotgames.com/")
 parser.add_argument("workingDir", help ="working directory location")
 args = parser.parse_args()
 
-api = args.api
+regionId = args.regionId
 matchId = args.matchId
+api = args.api
 workingDir = args.workingDir
 
 os.chdir(workingDir)
 
-print('riotMatch.py called with api ['+api+'] matchId ['+matchId+']')
+print('riotMatch.py called with regionId ['+regionId+'], matchId ['+matchId+'], api ['+api+']')
 
 infoJson = {
     "match" : {
@@ -26,17 +28,36 @@ infoJson = {
     }
 }
 
-p = Path('Results/'+matchId)
+
+p = Path('Results/' + regionId + '/' + matchId)
 if p.exists():
-    for child in p.iterdir():
-        if child.suffix != '.json': # only allow to delete folders only containing json files
-            print("Folder already exists with contents other then json - exiting")
-            exit(2)
-    shutil.rmtree(p)
-p.mkdir()
+    print("Folder for match already exists - exiting with code 2")
+    exit(2)
+
+urlRegionAmerica = 'https://americas.api.riotgames.com'
+urlRegionAsia = 'https://asia.api.riotgames.com'
+urlRegionEurope = 'https://europe.api.riotgames.com'
+urlRegionSea = 'https://sea.api.riotgames.com'
+
+urlRegion = ''
+
+if regionId == '1':
+    # americas
+    urlRegion = urlRegionAmerica
+elif regionId == '2':
+    # asia
+    urlRegion = urlRegionAsia
+elif regionId == '3':
+    # europe
+    urlRegion = urlRegionEurope
+elif regionId == '4':
+    # sea
+    urlRegion = urlRegionSea
+else:
+    print("Invalid region code " + regionId + " - exiting with code 3")
+    exit(3)
 
 
-urlRegion = 'https://europe.api.riotgames.com'
 urlApi = '/lol/match/v5/matches/'+matchId
 urlParamsTimeline = '/timeline?api_key=' + api
 urlParamsInfo = '?api_key=' + api
@@ -54,10 +75,13 @@ if 'metadata' not in data:
 if 'info' not in data:
     exit(3)
 
-jsonFile = open('Results/'+matchId+"/MatchInfo.json", "w")
+# create folder for match 
+p.mkdir()
+
+jsonFile = open('Results/'+ regionId + '/' + matchId + "/MatchInfo.json", "w")
 jsonFile.write(jsonString)
 jsonFile.close()
-print(" Match " + matchId + " info data fetched!")
+print("Region "+ regionId + ": Match " + matchId + " info data fetched!")
 infoJson["match"]["end"] = time.time()
 
 
@@ -73,12 +97,14 @@ if 'metadata' not in data:
 if 'info' not in data:
     exit(3)
 
-jsonFile = open('Results/'+matchId+"/Match.json", "w")
+jsonFile = open('Results/'+ regionId + '/' + matchId + "/Match.json", "w")
 jsonFile.write(jsonString)
 jsonFile.close()
-print("Match " + matchId + " timeline data fetched!")
+print("Region "+ regionId + ": Match " + matchId + " timeline data fetched!")
 infoJson["timeline"]["end"] = time.time()
 
-jsonInfoFile = open('Results/'+matchId+'/info.json', 'a')
+jsonInfoFile = open('Results/'+ regionId + '/' + matchId + '/info.json', 'a')
 jsonInfoFile.write(json.dumps(infoJson))
 jsonInfoFile.close()
+
+print("Region "+ regionId + ": Match " + matchId + " finished")

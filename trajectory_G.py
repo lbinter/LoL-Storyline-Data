@@ -4,11 +4,13 @@ from PIL import Image
 # useSimple = True
 
 parser = argparse.ArgumentParser()
+parser.add_argument("regionId", help ="riot api regionId, 1 = americas, 2 = asia, 3 = europe, 4 = sea")
 parser.add_argument("matchId", help ="riot league of legends match id")
 parser.add_argument("useMode", help ="useMode 0 - simple, 1 - Simple(7), 2 - Complex")
 parser.add_argument("workingDir", help ="working directory location")
 args = parser.parse_args()
 
+regionId = args.regionId
 matchId = args.matchId
 # useMode 0 - simple, 1 - Simple(7), 2 - Complex
 useMode = args.useMode
@@ -237,16 +239,16 @@ def getArea(x, y):
     return areaToSession[area]
 
 
-f = open('Results/'+matchId+'/Player1.json')
-f2 = open('Results/'+matchId+'/Player2.json')
-f3 = open('Results/'+matchId+'/Player3.json')
-f4 = open('Results/'+matchId+'/Player4.json')
-f5 = open('Results/'+matchId+'/Player5.json')
-f6 = open('Results/'+matchId+'/Player6.json')
-f7 = open('Results/'+matchId+'/Player7.json')
-f8 = open('Results/'+matchId+'/Player8.json')
-f9 = open('Results/'+matchId+'/Player9.json')
-f10 = open('Results/'+matchId+'/Player10.json')
+f = open('Results/' + regionId + '/' + matchId + '/Player1.json')
+f2 = open('Results/' + regionId + '/' + matchId + '/Player2.json')
+f3 = open('Results/' + regionId + '/' + matchId + '/Player3.json')
+f4 = open('Results/' + regionId + '/' + matchId + '/Player4.json')
+f5 = open('Results/' + regionId + '/' + matchId + '/Player5.json')
+f6 = open('Results/' + regionId + '/' + matchId + '/Player6.json')
+f7 = open('Results/' + regionId + '/' + matchId + '/Player7.json')
+f8 = open('Results/' + regionId + '/' + matchId + '/Player8.json')
+f9 = open('Results/' + regionId + '/' + matchId + '/Player9.json')
+f10 = open('Results/' + regionId + '/' + matchId + '/Player10.json')
 
 fileOpenList = [f, f2, f3, f4, f5, f6, f7, f8, f9, f10]
 
@@ -288,12 +290,12 @@ for i in range(len(playerList)):
         "Session": getArea(x, y)
     }
     
-    cv2.imwrite("Results/"+matchId+"/trajectory" + str(i+1) + ".png", image)
+    cv2.imwrite("Results/" + regionId + '/' + matchId + "/trajectory" + str(i+1) + ".png", image)
 
     LOLTimeline["Story"]["Characters"][playerList[i]].append(lastObj)
 
     jsonString = json.dumps(LOLTimeline, indent=2)
-    jsonFile = open("Results/"+matchId+"/trajectory.json", "w") # used to be P.json
+    jsonFile = open("Results/" + regionId + '/' + matchId + "/trajectory.json", "w") # used to be P.json
     jsonFile.write(jsonString)
     jsonFile.close()
     
