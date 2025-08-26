@@ -161,7 +161,7 @@ for p in range(1,11):
                     PlayerPosTime.append({'x': events[i][j]['position']['x'], 'y': events[i][j]['position']['y']})
                     time1 = events[i][j]['timestamp']
                     PlayerTime.append(time1)
-                    print("playerID = " + str(currentPlayerID) + " time = " + str(events[i][j]['timestamp']))
+                    # print("playerID = " + str(currentPlayerID) + " time = " + str(events[i][j]['timestamp']))
                 else:
                     time = events[i][j]['timestamp']
                     time1 = time - death_offset
@@ -197,15 +197,15 @@ for p in range(1,11):
                     y = events[i][j]['position']['y']
                     area = getAreaName(x / 15000, y / 15000)
 
-                    print("playerID = " + str(victimID) + " area = " + area + " time = " + str(time1) + "- D")
-                    print("playerID = " + str(victimID) + " area = " + area + " time = " + str(time) + "< D")
-                    print("playerID = " + str(victimID) + " area = " + area + " time = " + str(time2) + "+ D")
+                    # print("playerID = " + str(victimID) + " area = " + area + " time = " + str(time1) + "- D")
+                    # print("playerID = " + str(victimID) + " area = " + area + " time = " + str(time) + "< D")
+                    # print("playerID = " + str(victimID) + " area = " + area + " time = " + str(time2) + "+ D")
             if events[i][j]['type'] == "BUILDING_KILL" and events[i][j]['killerId'] == currentPlayerID:
                 if not usePlateau:
                     PlayerPosTime.append({'x': events[i][j]['position']['x'], 'y': events[i][j]['position']['y']})
                     time = events[i][j]['timestamp']
                     PlayerTime.append(time1)
-                    print("playerID = " + str(currentPlayerID) + " time = " + str(events[i][j]['timestamp']))
+                    # print("playerID = " + str(currentPlayerID) + " time = " + str(events[i][j]['timestamp']))
                 else:
                     time = events[i][j]['timestamp']
                     time1 = time - death_offset
@@ -232,9 +232,9 @@ for p in range(1,11):
                     y = events[i][j]['position']['y']
                     area = getAreaName(x / 15000, y / 15000)
 
-                    print("playerID = " + str(killerId) + " area = " + area + " time = " + str(time1) + "- D")
-                    print("playerID = " + str(killerId) + " area = " + area + " time = " + str(time) + "< D")
-                    print("playerID = " + str(killerId) + " area = " + area + " time = " + str(time2) + "+ D")
+                    # print("playerID = " + str(killerId) + " area = " + area + " time = " + str(time1) + "- D")
+                    # print("playerID = " + str(killerId) + " area = " + area + " time = " + str(time) + "< D")
+                    # print("playerID = " + str(killerId) + " area = " + area + " time = " + str(time2) + "+ D")
 
     # Find out the timestamp and position info when any events happened to the player
     for i in range(len(eventsWithPos)):
@@ -256,12 +256,12 @@ for p in range(1,11):
     for i in range(len(PlayerPosTime)):
         timelineInfo.append(PlayerPosTime[i])
 
-    print(timelineInfo)
+    # print(timelineInfo)
 
     # Ordering it based on the timestamp
     timelineInfo.sort(key=lambda x: x['timestamp'])
 
-    print(timelineInfo)
+    # print(timelineInfo)
 
     # export of player data to JSON file
     jsonString = json.dumps(timelineInfo)

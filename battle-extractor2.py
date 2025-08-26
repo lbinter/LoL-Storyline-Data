@@ -73,14 +73,14 @@ for i in range(len(events)):
             currentPlayer.append(events[i][j]['victimId'])
 
 # RUN DBSCAN
-print(df['x'])
+# print(df['x'])
 
 # For float-precision issue in DB-SCAN we need to scale the data
 
 df['x'] = df['x'].mul(factor)  # scale up x and y coord to
 df['y'] = df['y'].mul(factor)
 
-print(df['x'])
+# print(df['x'])
 
 #   eps1 = maximum spatial distance
 #   eps2 = maximum temporal distance
@@ -91,8 +91,8 @@ st_dbscan = ST_DBSCAN(eps1=90, eps2=104, min_samples=3)
 st_dbscan.fit(data)
 
 # plot(data[:,1:], st_dbscan.labels)
-print("CLUSTER LABELS")
-print(st_dbscan.labels)
+# print("CLUSTER LABELS")
+# print(st_dbscan.labels)
 
 # print(df)
 
@@ -122,7 +122,7 @@ for index, row in df.iterrows():
 
     color = (0, 0, 0)
     if st_dbscan.labels[i] >= 0:
-        print(str(st_dbscan.labels[i]) + "  " + str(row['time'] * max_time))
+        # print(str(st_dbscan.labels[i]) + "  " + str(row['time'] * max_time))
 
         obj = {'label': int(st_dbscan.labels[i]), 'timestamp': original_times[i], 'player': 'Player' + str(currentPlayer[i])}
 
