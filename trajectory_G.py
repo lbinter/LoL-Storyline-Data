@@ -237,16 +237,16 @@ def getArea(x, y):
     return areaToSession[area]
 
 
-f = open('Results/'+matchId+'/player1.json')
-f2 = open('Results/'+matchId+'/player2.json')
-f3 = open('Results/'+matchId+'/player3.json')
-f4 = open('Results/'+matchId+'/player4.json')
-f5 = open('Results/'+matchId+'/player5.json')
-f6 = open('Results/'+matchId+'/player6.json')
-f7 = open('Results/'+matchId+'/player7.json')
-f8 = open('Results/'+matchId+'/player8.json')
-f9 = open('Results/'+matchId+'/player9.json')
-f10 = open('Results/'+matchId+'/player10.json')
+f = open('Results/'+matchId+'/Player1.json')
+f2 = open('Results/'+matchId+'/Player2.json')
+f3 = open('Results/'+matchId+'/Player3.json')
+f4 = open('Results/'+matchId+'/Player4.json')
+f5 = open('Results/'+matchId+'/Player5.json')
+f6 = open('Results/'+matchId+'/Player6.json')
+f7 = open('Results/'+matchId+'/Player7.json')
+f8 = open('Results/'+matchId+'/Player8.json')
+f9 = open('Results/'+matchId+'/Player9.json')
+f10 = open('Results/'+matchId+'/Player10.json')
 
 fileOpenList = [f, f2, f3, f4, f5, f6, f7, f8, f9, f10]
 
@@ -291,7 +291,6 @@ for i in range(len(playerList)):
     cv2.imwrite("Results/"+matchId+"/trajectory" + str(i+1) + ".png", image)
 
     LOLTimeline["Story"]["Characters"][playerList[i]].append(lastObj)
-
 
     jsonString = json.dumps(LOLTimeline, indent=2)
     jsonFile = open("Results/"+matchId+"/trajectory.json", "w") # used to be P.json
